@@ -1,4 +1,4 @@
-const Users = require("../models/userModel");
+const Users = require("../models/user.model");
 const createError = require("http-errors");
 
 const authAdmin = async (req, res, next) => {
