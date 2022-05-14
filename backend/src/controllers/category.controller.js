@@ -1,11 +1,11 @@
-const Category = require("../models/category.model");
+const { Categorys } = require("../models");
 // const Products = require("../models/productModel");
 const createError = require("http-errors");
 
 const categoryCtrl = {
   getCategories: async (req, res) => {
     try {
-      const categories = await Category.find();
+      const categories = await Categorys.find();
       res.json(categories);
     } catch (err) {
       next(err);
@@ -16,10 +16,10 @@ const categoryCtrl = {
       // if user have role = 1 ---> admin
       // only admin can create , delete and update category
       const { name } = req.body;
-      const category = await Category.findOne({ name });
+      const category = await Categorys.findOne({ name });
       if (category) throw createError(400, "This category already exists.");
 
-      const newCategory = new Category({ name });
+      const newCategory = new Categorys({ name });
 
       await newCategory.save();
       res.json({ msg: "Created a category" });
@@ -35,8 +35,8 @@ const categoryCtrl = {
   //         msg: "Please delete all products with a relationship.",
   //       });
 
-  //     await Category.findByIdAndDelete(req.params.id);
-  //     res.json({ msg: "Deleted a Category" });
+  //     await Categorys.findByIdAndDelete(req.params.id);
+  //     res.json({ msg: "Deleted a Categorys" });
   //   } catch (err) {
   //     return res.status(500).json({ msg: err.message });
   //   }
@@ -44,7 +44,7 @@ const categoryCtrl = {
   // updateCategory: async (req, res) => {
   //   try {
   //     const { name } = req.body;
-  //     await Category.findOneAndUpdate({ _id: req.params.id }, { name });
+  //     await Categorys.findOneAndUpdate({ _id: req.params.id }, { name });
 
   //     res.json({ msg: "Updated a category" });
   //   } catch (err) {
